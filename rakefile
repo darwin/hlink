@@ -1,0 +1,12 @@
+desc "build"
+task :build do
+    system("gcc -o hlink hlink.c -Wall")
+end
+
+desc "build and install"
+task :install => :build do
+  prefix = ENV['PREFIX'] || ENV['prefix'] || '/usr/local'
+
+  FileUtils.mkdir_p "#{prefix}/bin"
+  FileUtils.cp "hlink", "#{prefix}/bin"
+end
